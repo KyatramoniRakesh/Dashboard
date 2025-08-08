@@ -6,6 +6,7 @@ const SignupPage = () => {
   const [form, setForm] = useState({
     email: '',
     password: '',
+    role: 'user', // default role
   });
 
   const handleChange = (e) => {
@@ -15,7 +16,23 @@ const SignupPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    localStorage.setItem('user', JSON.stringify(form));
+    // Get existing users from localStorage
+    const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
+
+    // Check if user already exists
+    if (existingUsers.some((u) => u.email === form.email)) {
+      alert('User already exists! Please login.');
+      return;
+    }
+
+    // Save the new user
+    const newUser = {
+      email: form.email,
+      password: form.password,
+      role: form.role, // store role
+    };
+
+    localStorage.setItem('users', JSON.stringify([...existingUsers, newUser]));
     alert('Signup successful! Now login.');
     navigate('/login');
   };
@@ -32,6 +49,7 @@ const SignupPage = () => {
           onChange={handleChange}
           required
         /><br /><br />
+
         <input
           type="password"
           name="password"
@@ -40,6 +58,17 @@ const SignupPage = () => {
           onChange={handleChange}
           required
         /><br /><br />
+
+        <select
+          name="role"
+          value={form.role}
+          onChange={handleChange}
+        >
+          <option value="user">User</option>
+          <option value="admin">Admin</option> {/* For testing purposes */}
+        </select>
+        <br /><br />
+
         <button type="submit">Signup</button>
       </form>
     </div>

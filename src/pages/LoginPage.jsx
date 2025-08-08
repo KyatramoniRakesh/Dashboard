@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import '../CSS/LoginPage.css';
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -11,49 +12,99 @@ const LoginPage = () => {
     password: '',
   });
 
+  const [errors, setErrors] = useState({});
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+    setErrors({ ...errors, [e.target.name]: '' });
+  };
+
+  const validateForm = () => {
+    let formErrors = {};
+    if (!form.email) {
+      formErrors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(form.email)) {
+      formErrors.email = 'Invalid email format';
+    }
+    if (!form.password) {
+      formErrors.password = 'Password is required';
+    } else if (form.password.length < 6) {
+      formErrors.password = 'Password must be at least 6 characters';
+    }
+    return formErrors;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const formErrors = validateForm();
+    if (Object.keys(formErrors).length > 0) {
+      setErrors(formErrors);
+      return;
+    }
 
-    const storedUser = JSON.parse(localStorage.getItem('user'));
+    // Get all registered users from localStorage
+    const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
 
-    if (
-      storedUser &&
-      storedUser.email === form.email &&
-      storedUser.password === form.password
-    ) {
-      login({ email: form.email });
-      navigate('/dashboard');
+    // Match user
+    const storedUser = existingUsers.find(
+      (u) => u.email === form.email && u.password === form.password
+    );
+
+    if (storedUser) {
+      // Store current logged-in user separately
+      localStorage.setItem('currentUser', JSON.stringify(storedUser));
+
+      // Update AuthContext
+      login({ email: storedUser.email, role: storedUser.role });
+
+      // Redirect based on role
+      if (storedUser.role === 'admin') {
+        navigate('/admin');
+      } else {
+        navigate('/dashboard');
+      }
     } else {
       alert('Invalid credentials or user not found');
     }
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={form.email}
-          onChange={handleChange}
-          required
-        /><br /><br />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={form.password}
-          onChange={handleChange}
-          required
-        /><br /><br />
-        <button type="submit">Login</button>
-      </form>
+    <div className="login-wrapper">
+      <div className="login-left">
+        <h1>Welcome Back</h1>
+        <p>Sign in to access your dashboard and manage everything in one place.</p>
+      </div>
+
+      <div className="login-right">
+        <form onSubmit={handleSubmit} className="login-form glass">
+          <h2>Login</h2>
+          <div className="input-group">
+            <input
+              type="email"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+              required
+            />
+            <label>Email</label>
+            {errors.email && <span className="error-text">{errors.email}</span>}
+          </div>
+
+          <div className="input-group">
+            <input
+              type="password"
+              name="password"
+              value={form.password}
+              onChange={handleChange}
+              required
+            />
+            <label>Password</label>
+            {errors.password && <span className="error-text">{errors.password}</span>}
+          </div>
+
+          <button type="submit" className="login-btn">Sign In</button>
+        </form>
+      </div>
     </div>
   );
 };
