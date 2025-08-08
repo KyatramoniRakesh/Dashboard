@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import '../CSS/LoginPage.css';
 
-
 const LoginPage = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
@@ -43,22 +42,14 @@ const LoginPage = () => {
       return;
     }
 
-    // Get all registered users from localStorage
     const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
-
-    // Match user
     const storedUser = existingUsers.find(
       (u) => u.email === form.email && u.password === form.password
     );
 
     if (storedUser) {
-      // Store current logged-in user separately
       localStorage.setItem('currentUser', JSON.stringify(storedUser));
-
-      // Update AuthContext
       login({ email: storedUser.email, role: storedUser.role });
-
-      // Redirect based on role
       if (storedUser.role === 'admin') {
         navigate('/admin');
       } else {
@@ -75,7 +66,6 @@ const LoginPage = () => {
         <h1>Welcome Back</h1>
         <p>Sign in to access your dashboard and manage everything in one place.</p>
       </div>
-
       <div className="login-right">
         <form onSubmit={handleSubmit} className="login-form glass">
           <h2>Login</h2>
@@ -86,11 +76,12 @@ const LoginPage = () => {
               value={form.email}
               onChange={handleChange}
               required
+              placeholder=" "
+              autoComplete="username"
             />
             <label>Email</label>
             {errors.email && <span className="error-text">{errors.email}</span>}
           </div>
-
           <div className="input-group">
             <input
               type="password"
@@ -98,17 +89,17 @@ const LoginPage = () => {
               value={form.password}
               onChange={handleChange}
               required
+              placeholder=" " 
+              autoComplete="current-password"
             />
             <label>Password</label>
             {errors.password && <span className="error-text">{errors.password}</span>}
           </div>
-
           <button type="submit" className="login-btn">Sign In</button>
           <p>
-          Don't have an account? <Link to="/signup">Sign up here</Link>
-        </p>
+            Don't have an account? <Link to="/signup">Sign up here</Link>
+          </p>
         </form>
-        
       </div>
     </div>
   );

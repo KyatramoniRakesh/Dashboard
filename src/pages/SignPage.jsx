@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../CSS/SignUpPage.css';
+// import '../CSS/SignUpPage.css';
 
 const SignupPage = () => {
   const navigate = useNavigate();
   const [form, setForm] = useState({
     email: '',
     password: '',
-    role: 'user', // default role
+    role: 'user', 
   });
 
   const handleChange = (e) => {
