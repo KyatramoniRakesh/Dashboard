@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import '../CSS/LoginPage.css';
+
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -103,7 +104,11 @@ const LoginPage = () => {
           </div>
 
           <button type="submit" className="login-btn">Sign In</button>
+          <p>
+          Don't have an account? <Link to="/signup">Sign up here</Link>
+        </p>
         </form>
+        
       </div>
     </div>
   );

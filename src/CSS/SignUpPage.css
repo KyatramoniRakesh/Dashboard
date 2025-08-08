@@ -1,0 +1,90 @@
+/* SignUpPage.css */
+
+* {
+  box-sizing: border-box;
+  
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f5f7fa;
+  height: 100vh;
+  
+}
+
+div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+h2 {
+  margin-bottom: 20px;
+  color: #333;
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+form {
+  background: #fff;
+  padding: 30px 40px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  width: 400px;
+  max-width: 100%;
+}
+
+input[type="email"],
+input[type="password"],
+select {
+  width: 100%;
+  padding: 14px 16px;
+  margin-bottom: 20px;
+  border: 1.8px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus,
+select:focus {
+  outline: none;
+  border-color: #4f46e5; /* Indigo */
+  box-shadow: 0 0 5px rgba(79, 70, 229, 0.4);
+}
+
+button[type="submit"] {
+  width: 100%;
+  background-color: #4f46e5; /* Indigo */
+  color: white;
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #4338ca;
+}
+h2{
+    color: #fff;
+}
+
+@media (max-width: 480px) {
+  form {
+    padding: 25px 20px;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+}
