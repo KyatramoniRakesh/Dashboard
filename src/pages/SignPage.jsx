@@ -1,36 +1,57 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import '../CSS/SignUpPage.css';
+import '../CSS/SignupPage.css';
 
 const SignupPage = () => {
   const navigate = useNavigate();
   const [form, setForm] = useState({
     email: '',
     password: '',
-    role: 'user', 
+    role: 'user',
   });
+
+  const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+    setErrors({ ...errors, [e.target.name]: '' });
+  };
+
+  const validateForm = () => {
+    let formErrors = {};
+    if (!form.email) {
+      formErrors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(form.email)) {
+      formErrors.email = 'Invalid email format';
+    }
+    if (!form.password) {
+      formErrors.password = 'Password is required';
+    } else if (form.password.length < 6) {
+      formErrors.password = 'Password must be at least 6 characters';
+    }
+    return formErrors;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const formErrors = validateForm();
+    if (Object.keys(formErrors).length > 0) {
+      setErrors(formErrors);
+      return;
+    }
 
-    // Get existing users from localStorage
     const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
 
-    // Check if user already exists
     if (existingUsers.some((u) => u.email === form.email)) {
       alert('User already exists! Please login.');
       return;
     }
 
-    // Save the new user
     const newUser = {
       email: form.email,
       password: form.password,
-      role: form.role, // store role
+      role: form.role,
+      createdAt: new Date().toISOString(),
     };
 
     localStorage.setItem('users', JSON.stringify([...existingUsers, newUser]));
@@ -39,39 +60,58 @@ const SignupPage = () => {
   };
 
   return (
-    <div>
-      <h2>Signup</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={form.email}
-          onChange={handleChange}
-          required
-        /><br /><br />
+    <div className="signup-wrapper">
+      <div className="signup-left">
+        <h1>Join Us</h1>
+        <p>Create your account to explore all features.</p>
+      </div>
+      <div className="signup-right">
+        <div className="glass-signup">
+          <form className="signup-form" onSubmit={handleSubmit}>
+            <h2>Sign Up</h2>
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={form.password}
-          onChange={handleChange}
-          required
-        /><br /><br />
+            <div className="input-group-signup">
+              <input
+                type="email"
+                name="email"
+                placeholder=" "
+                value={form.email}
+                onChange={handleChange}
+                required
+              />
+              <label>Email</label>
+              {errors.email && <span className="error-text">{errors.email}</span>}
+            </div>
 
-        <select
-          name="role"
-          value={form.role}
-          onChange={handleChange}
-        >
-          <option value="user">User</option>
-          <option value="admin">Admin</option> {/* For testing purposes */}
-        </select>
-        <br /><br />
+            <div className="input-group-signup">
+              <input
+                type="password"
+                name="password"
+                placeholder=" "
+                value={form.password}
+                onChange={handleChange}
+                required
+              />
+              <label>Password</label>
+              {errors.password && <span className="error-text">{errors.password}</span>}
+            </div>
 
-        <button type="submit">Signup</button>
-      </form>
+            <div className="input-group-signup">
+              <select name="role" value={form.role} onChange={handleChange}>
+                <option value="user">User</option>
+                <option value="admin">Admin</option>
+              </select>
+              <label>Role</label>
+            </div>
+
+            <button className="signup-btn" type="submit">
+              Create Account
+            </button>
+
+            <p>Already have an account? <a href="/login">Login</a></p>
+          </form>
+        </div>
+      </div>
     </div>
   );
 };

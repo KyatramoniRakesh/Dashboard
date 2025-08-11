@@ -1,0 +1,104 @@
+/* src/pages/dashboardTabs/Profile.css */
+
+.profile-tab {
+  max-width: 600px;
+  margin: 0 auto;
+  color: #1f2937; /* dark slate */
+}
+
+.profile-tab h1 {
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  color: #3b82f6; /* blue-500 */
+  text-align: center;
+}
+
+.profile-info p {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  background: #e0e7ff; /* light indigo */
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 0 8px #c7d2fe;
+}
+
+.btn-edit {
+  background-color: #3b82f6;
+  color: white;
+  padding: 0.6rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  display: block;
+  margin: 1rem auto 0;
+  transition: background-color 0.3s ease;
+}
+
+.btn-edit:hover {
+  background-color: #2563eb;
+}
+
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.profile-form label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  color: #374151; /* gray-700 */
+}
+
+.profile-form input {
+  padding: 0.6rem 0.8rem;
+  border-radius: 6px;
+  border: 1.5px solid #cbd5e1; /* gray-300 */
+  font-size: 1rem;
+  margin-top: 0.4rem;
+  transition: border-color 0.3s ease;
+}
+
+.profile-form input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 5px #3b82f6;
+}
+
+.btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.btn-save {
+  background-color: #10b981; /* emerald */
+  color: white;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.btn-save:hover {
+  background-color: #059669;
+}
+
+.btn-cancel {
+  background-color: #ef4444; /* red-500 */
+  color: white;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.btn-cancel:hover {
+  background-color: #b91c1c;
+}

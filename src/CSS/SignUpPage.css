@@ -1,90 +1,149 @@
-SignUpPage.css
-
-* {
+/* Base Reset for Signup */
+.signup-wrapper * {
   box-sizing: border-box;
-  
-}
-
-body, html {
-  margin: 0;
-  padding: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #f5f7fa;
-  height: 100vh;
-  
 }
 
-div {
+.signup-wrapper {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.signup-left {
+  flex: 1;
+  background: linear-gradient(135deg, #8A2BE2, #FF4DFF);
+  color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  padding: 20px;
+  align-items: flex-start;
+  padding: 60px 50px 60px 70px;
+  box-shadow: 0 0 80px #8A2BE2;
 }
 
-h2 {
+.signup-left h1 {
+  font-size: 3.5rem;
+  font-weight: 900;
   margin-bottom: 20px;
-  color: #333;
-  font-weight: 700;
-  font-size: 2rem;
 }
 
-form {
-  background: #fff;
-  padding: 30px 40px;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  width: 400px;
-  max-width: 100%;
+.signup-left p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  max-width: 420px;
 }
 
-input[type="email"],
-input[type="password"],
-select {
+.signup-right {
+  flex: 1;
+  background: url('https://images.unsplash.com/photo-1508780709619-79562169bc64?auto=format&fit=crop&w=1950&q=80') no-repeat center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.glass-signup {
+  background: rgba(30, 30, 30, 0.85);
+  border-radius: 25px;
+  padding: 40px 35px;
+  width: 380px;
+  color: #eee;
+  backdrop-filter: blur(14px);
+}
+
+.signup-form h2 {
+  text-align: center;
+  color: #FF4DFF;
+  font-size: 2.4rem;
+  margin-bottom: 2.5rem;
+}
+
+.input-group-signup {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.input-group-signup input,
+.input-group-signup select {
   width: 100%;
   padding: 14px 16px;
-  margin-bottom: 20px;
-  border: 1.8px solid #ddd;
-  border-radius: 6px;
-  font-size: 1rem;
-  transition: border-color 0.3s ease;
-}
-
-input[type="email"]:focus,
-input[type="password"]:focus,
-select:focus {
-  outline: none;
-  border-color: #4f46e5; /* Indigo */
-  box-shadow: 0 0 5px rgba(79, 70, 229, 0.4);
-}
-
-button[type="submit"] {
-  width: 100%;
-  background-color: #4f46e5; /* Indigo */
-  color: white;
-  font-weight: 600;
-  font-size: 1.1rem;
-  padding: 14px;
-  border: none;
   border-radius: 8px;
+  border: 2px solid transparent;
+  background: transparent;
+  color: #eee;
+  font-size: 1rem;
+  outline: none;
+  box-shadow: 0 0 5px #8A2BE2 inset;
+  transition: 0.3s;
+}
+
+.input-group-signup input:focus,
+.input-group-signup select:focus {
+  border-color: #FF4DFF;
+  box-shadow: 0 0 12px #FF4DFF;
+}
+
+.input-group-signup label {
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  transform: translateY(-50%);
+  color: #bbb;
+  font-size: 1rem;
+  pointer-events: none;
+  transition: 0.3s;
+}
+
+.input-group-signup input:focus + label,
+.input-group-signup input:not(:placeholder-shown) + label,
+.input-group-signup select:focus + label {
+  top: -10px;
+  font-size: 0.75rem;
+  color: #FF4DFF;
+  background: #121212;
+  padding: 0 5px;
+}
+
+.signup-btn {
+  width: 100%;
+  padding: 16px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #8A2BE2, #FF4DFF);
+  border: none;
+  color: white;
+  border-radius: 12px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: 0.3s;
 }
 
-button[type="submit"]:hover {
-  background-color: #4338ca;
-}
-h2{
-    color: #fff;
+.signup-btn:hover {
+  box-shadow: 0 0 30px #FF4DFF;
 }
 
-@media (max-width: 480px) {
-  form {
-    padding: 25px 20px;
+.signup-form p {
+  margin-top: 1.8rem;
+  text-align: center;
+}
+
+.signup-form p a {
+  color: #FF4DFF;
+  font-weight: bold;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .signup-wrapper {
+    flex-direction: column;
   }
-
-  h2 {
-    font-size: 1.6rem;
+  .signup-left, .signup-right {
+    width: 100%;
+    text-align: center;
+  }
+  .glass-signup {
+    width: 95%;
+    margin: auto;
   }
 }
+

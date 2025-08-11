@@ -42,14 +42,19 @@ const LoginPage = () => {
       return;
     }
 
+    // Get all registered users
     const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
+
+    // Find the matching user
     const storedUser = existingUsers.find(
       (u) => u.email === form.email && u.password === form.password
     );
 
     if (storedUser) {
-      localStorage.setItem('currentUser', JSON.stringify(storedUser));
-      login({ email: storedUser.email, role: storedUser.role });
+      // Save full user object in AuthContext + localStorage
+      login(storedUser);
+
+      // Redirect based on role
       if (storedUser.role === 'admin') {
         navigate('/admin');
       } else {
