@@ -1,0 +1,117 @@
+/* Topbar.css */
+.ud-topbar {
+  background: #1e293b;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.ud-topbar .left {
+  display: flex;
+  align-items: center;
+}
+
+.ud-topbar .search {
+  position: relative;
+}
+
+.ud-topbar .search-icon {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  color: #94a3b8;
+}
+
+.ud-topbar .search input {
+  background: #0f172a;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  border-radius: 6px;
+  padding: 8px 12px 8px 36px;
+  color: #f8fafc;
+  width: 250px;
+  outline: none;
+}
+
+.ud-topbar .search input:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.3);
+}
+
+.ud-topbar .right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.ud-topbar .icon-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #94a3b8;
+  font-size: 1.1rem;
+}
+
+.ud-topbar .icon-btn:hover {
+  color: #38bdf8;
+}
+
+.ud-topbar .profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ud-topbar .profile img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+}
+
+.ud-topbar .info {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.85rem;
+}
+
+.ud-topbar .name {
+  color: #f8fafc;
+  font-weight: 500;
+}
+
+.ud-topbar .role {
+  color: #94a3b8;
+  font-size: 0.75rem;
+}
+
+.ud-topbar .logout {
+  background: #ef4444;
+  border: none;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.ud-topbar .logout:hover {
+  background: #dc2626;
+}
+
+@media (max-width: 600px) {
+  .ud-topbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+    height: auto;
+    padding: 0.75rem;
+  }
+  .ud-topbar .search input {
+    width: 100%;
+  }
+  .ud-topbar .info {
+    display: none;
+  }
+}

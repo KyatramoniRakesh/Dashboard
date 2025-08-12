@@ -1,41 +1,34 @@
-import React from 'react';
-import  "../../CSS/UserDashboard/Orders.css"
+import React, { useState, useEffect } from 'react';
+import '../../CSS/UserDashboard/Orders.css';
 
 const Orders = () => {
-  // Sample orders data
-  const orders = [
-    { id: 'ORD1234', date: '2025-08-01', status: 'Delivered', total: 150.0 },
-    { id: 'ORD1235', date: '2025-07-21', status: 'Processing', total: 89.99 },
-    { id: 'ORD1236', date: '2025-07-10', status: 'Cancelled', total: 29.99 },
-  ];
+  const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    // read from localStorage (replace with API)
+    setOrders(JSON.parse(localStorage.getItem('orders') || '[]'));
+  }, []);
+
+  if (!orders.length) {
+    return <div className="ud-empty">You have no orders yet.</div>;
+  }
 
   return (
-    <div className="orders-tab">
-      <h1>Your Orders</h1>
-      {orders.length === 0 ? (
-        <p>You have no orders yet.</p>
-      ) : (
-        <table className="orders-table">
-          <thead>
-            <tr>
-              <th>Order ID</th>
-              <th>Date</th>
-              <th>Status</th>
-              <th>Total ($)</th>
+    <div className="ud-orders">
+      <h2>Your Orders</h2>
+      <table className="ud-table">
+        <thead><tr><th>Order</th><th>Date</th><th>Status</th><th>Total</th></tr></thead>
+        <tbody>
+          {orders.map(o => (
+            <tr key={o.id}>
+              <td>{o.id}</td>
+              <td>{o.date}</td>
+              <td className={`status ${o.status?.toLowerCase()}`}>{o.status}</td>
+              <td>₹{(o.total||0).toFixed(2)}</td>
             </tr>
-          </thead>
-          <tbody>
-            {orders.map(({ id, date, status, total }) => (
-              <tr key={id}>
-                <td>{id}</td>
-                <td>{date}</td>
-                <td className={`status ${status.toLowerCase()}`}>{status}</td>
-                <td>{total.toFixed(2)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };

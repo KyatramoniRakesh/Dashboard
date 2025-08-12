@@ -1,0 +1,105 @@
+/* ===== Overview Wrapper ===== */
+.ud-overview {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ===== Welcome Section ===== */
+.ud-overview .welcome {
+  background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+  color: white;
+  padding: 24px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.ud-overview .welcome h1 {
+  margin: 0 0 5px;
+  font-weight: 600;
+}
+
+.ud-overview .welcome p {
+  margin: 0;
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+/* ===== Stats Cards Grid ===== */
+.ud-overview .cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.ud-overview .stat-card {
+  background: white;
+  border-radius: 10px;
+  padding: 16px 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ud-overview .stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+.ud-overview .stat-card .title {
+  font-size: 0.85rem;
+  color: #64748b; /* slate-500 */
+}
+
+.ud-overview .stat-card .value {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #0f172a; /* slate-900 */
+}
+
+/* ===== Recent Activity ===== */
+.ud-overview .recent-activity {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.ud-overview .recent-activity h3 {
+  margin: 0 0 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.ud-overview .recent-activity ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.ud-overview .recent-activity li {
+  margin-bottom: 8px;
+  color: #1e293b;
+  font-size: 0.95rem;
+}
+
+.ud-overview .recent-activity strong {
+  color: #0ea5e9;
+}
+
+/* ===== Responsive Adjustments ===== */
+@media (max-width: 600px) {
+  .ud-overview .welcome {
+    padding: 16px;
+  }
+  .ud-overview .cards {
+    grid-template-columns: 1fr 1fr;
+  }
+  .ud-overview .stat-card {
+    align-items: center;
+    text-align: center;
+  }
+}

@@ -1,0 +1,96 @@
+/* ===== Notifications Wrapper ===== */
+.ud-notifications {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  max-width: 800px;
+}
+
+.ud-notifications h2 {
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+/* ===== Notification List ===== */
+.ud-notifications ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ud-notifications li {
+  background: #f8fafc;
+  padding: 14px 16px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.ud-notifications li:hover {
+  transform: translateY(-2px);
+  background: #f1f5f9;
+}
+
+/* ===== Unread / Read states ===== */
+.ud-notifications li.read {
+  opacity: 0.7;
+  background: #f8fafc;
+}
+
+.ud-notifications li div {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #1e293b;
+}
+
+.ud-notifications li small {
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+/* ===== Mark Read Button ===== */
+.ud-notifications button {
+  margin-top: 4px;
+  align-self: flex-start;
+  background: #0ea5e9;
+  border: none;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.ud-notifications button:hover {
+  background: #0284c7;
+}
+
+/* ===== Empty State (reuse global style for .ud-empty) ===== */
+.ud-empty {
+  text-align: center;
+  padding: 40px;
+  color: #94a3b8;
+  font-size: 0.95rem;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
+  .ud-notifications {
+    padding: 16px;
+  }
+  .ud-notifications li {
+    padding: 12px;
+  }
+}

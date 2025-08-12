@@ -1,20 +1,44 @@
-import React, { useState } from 'react';
-import '../CSS/UserDashboard.css'; 
+import React, { useState, useEffect } from 'react';
+import "../CSS/UserDashboard.css";
 
-import Overview from '../components/UserDashboardTabs/Overview.jsx';
+import Sidebar from '../components/UserDashboardTabs/Sidebar';
+import Topbar from '../components/UserDashboardTabs/Topbar';
+
+import Overview from '../components/UserDashboardTabs/Overview';
 import Profile from '../components/UserDashboardTabs/Profile';
 import Orders from '../components/UserDashboardTabs/Order';
-import Settings from '../components/UserDashboardTabs/Settings.jsx'
-import Support from '../components/UserDashboardTabs/Support.jsx';
+import Wishlist from '../components/UserDashboardTabs/Wishlist';
+import Cart from '../components/UserDashboardTabs/Cart';
+import Notifications from '../components/UserDashboardTabs/Notifications';
+import Settings from '../components/UserDashboardTabs/Settings';
+import Support from '../components/UserDashboardTabs/Support';
+
+const TABS = [
+  { id: 'overview', label: 'Overview' },
+  { id: 'orders', label: 'Orders' },
+  { id: 'cart', label: 'Cart' },
+  { id: 'wishlist', label: 'Wishlist' },
+  { id: 'profile', label: 'Profile' },
+  { id: 'notifications', label: 'Notifications' },
+  { id: 'settings', label: 'Settings' },
+  { id: 'support', label: 'Support' },
+];
 
 const UserDashboard = () => {
-  const [activeTab, setActiveTab] = useState('overview');
+  const [activeTab, setActiveTab] = useState(() => localStorage.getItem('ud_activeTab') || 'overview');
 
-  const renderContent = () => {
+  useEffect(() => {
+    localStorage.setItem('ud_activeTab', activeTab);
+  }, [activeTab]);
+
+  const renderTab = () => {
     switch (activeTab) {
       case 'overview': return <Overview />;
-      case 'profile': return <Profile />;
       case 'orders': return <Orders />;
+      case 'cart': return <Cart />;
+      case 'wishlist': return <Wishlist />;
+      case 'profile': return <Profile />;
+      case 'notifications': return <Notifications />;
       case 'settings': return <Settings />;
       case 'support': return <Support />;
       default: return <Overview />;
@@ -22,22 +46,16 @@ const UserDashboard = () => {
   };
 
   return (
-    <div className="dashboard-container">
-      <aside className="sidebar">
-        <h2 className="dashboard-logo">User Dashboard</h2>
-        <nav>
-          <ul>
-            <li className={activeTab === 'overview' ? 'active' : ''} onClick={() => setActiveTab('overview')}>Overview</li>
-            <li className={activeTab === 'profile' ? 'active' : ''} onClick={() => setActiveTab('profile')}>Profile</li>
-            <li className={activeTab === 'orders' ? 'active' : ''} onClick={() => setActiveTab('orders')}>Orders</li>
-            <li className={activeTab === 'settings' ? 'active' : ''} onClick={() => setActiveTab('settings')}>Settings</li>
-            <li className={activeTab === 'support' ? 'active' : ''} onClick={() => setActiveTab('support')}>Support</li>
-          </ul>
-        </nav>
-      </aside>
-      <main className="dashboard-content">
-        {renderContent()}
-      </main>
+    <div className="ud-root">
+      <Sidebar tabs={TABS} active={activeTab} onChange={setActiveTab} />
+      <div className="ud-main">
+        <Topbar onSearch={(q) => console.log('search:', q)} />
+        <main className="ud-content">
+          {renderTab()}
+        </main>
+      </div>
+
+     
     </div>
   );
 };

@@ -1,44 +1,45 @@
-// src/pages/dashboardTabs/Support.jsx
-import React, { useState } from 'react';
-import  "../../CSS/UserDashboard/Support.css"
+import React, { useState, useEffect } from 'react';
+import '../../CSS/UserDashboard/Support.css';
 
 const Support = () => {
-  const [message, setMessage] = useState('');
-  const [submitted, setSubmitted] = useState(false);
+  const [form, setForm] = useState({ subject:'', category:'general', message:'' });
+  const [tickets, setTickets] = useState([]);
 
-  const handleSubmit = (e) => {
+  useEffect(()=> setTickets(JSON.parse(localStorage.getItem('tickets')||'[]')), []);
+
+  const submit = (e) => {
     e.preventDefault();
-    if (!message.trim()) return;
-    // Here you could send this message to a backend or service
-    setSubmitted(true);
+    if (!form.subject || !form.message) return;
+    const ticket = { id: Date.now(), ...form, status:'open', date: new Date().toISOString() };
+    const next = [ticket, ...tickets];
+    setTickets(next);
+    localStorage.setItem('tickets', JSON.stringify(next));
+    setForm({ subject:'', category:'general', message:'' });
   };
 
   return (
-    <div className="support-tab">
-      <h1>Support & Help</h1>
+    <div className="ud-support">
+      <h2>Support</h2>
 
-      {!submitted ? (
-        <form className="support-form" onSubmit={handleSubmit}>
-          <label htmlFor="message">Describe your issue or question:</label>
-          <textarea
-            id="message"
-            rows="6"
-            placeholder="Write your message here..."
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            required
-          />
-          <button type="submit" className="btn-submit">Submit</button>
-        </form>
-      ) : (
-        <div className="thank-you">
-          <h2>Thank you for reaching out!</h2>
-          <p>Our support team will get back to you shortly.</p>
-          <button className="btn-new" onClick={() => { setMessage(''); setSubmitted(false); }}>
-            Send Another Message
-          </button>
-        </div>
-      )}
+      <form className="support-form" onSubmit={submit}>
+        <input placeholder="Subject" value={form.subject} onChange={(e)=>setForm({...form,subject:e.target.value})} required />
+        <select value={form.category} onChange={(e)=>setForm({...form,category:e.target.value})}>
+          <option value="general">General</option>
+          <option value="billing">Billing</option>
+          <option value="technical">Technical</option>
+        </select>
+        <textarea placeholder="Describe issue" value={form.message} onChange={(e)=>setForm({...form,message:e.target.value})} required />
+        <button className="primary">Submit Ticket</button>
+      </form>
+
+      <div className="tickets-list">
+        <h3>Your tickets</h3>
+        {tickets.length === 0 ? <div>No tickets</div> : (
+          <ul>
+            {tickets.map(t => <li key={t.id}><strong>{t.subject}</strong> <small>{t.status} • {new Date(t.date).toLocaleString()}</small></li>)}
+          </ul>
+        )}
+      </div>
     </div>
   );
 };

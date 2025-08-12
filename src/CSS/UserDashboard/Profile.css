@@ -1,104 +1,127 @@
-/* src/pages/dashboardTabs/Profile.css */
-
+/* ===== Profile Tab Container ===== */
 .profile-tab {
-  max-width: 600px;
-  margin: 0 auto;
-  color: #1f2937; /* dark slate */
+  background: white;
+  padding: 24px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  /* max-width: 600px; */
 }
 
 .profile-tab h1 {
-  margin-bottom: 1.5rem;
-  font-weight: 700;
-  color: #3b82f6; /* blue-500 */
-  text-align: center;
-}
-
-.profile-info p {
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
-  background: #e0e7ff; /* light indigo */
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 0 8px #c7d2fe;
-}
-
-.btn-edit {
-  background-color: #3b82f6;
-  color: white;
-  padding: 0.6rem 1.5rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 1.4rem;
   font-weight: 600;
-  display: block;
-  margin: 1rem auto 0;
-  transition: background-color 0.3s ease;
+  color: #0f172a;
+}
+
+/* ===== Profile Info (View Mode) ===== */
+.profile-info p {
+  margin: 0 0 10px;
+  font-size: 0.95rem;
+  color: #1e293b;
+}
+
+.profile-info strong {
+  color: #475569;
+  font-weight: 500;
+}
+
+/* ===== Edit Button ===== */
+.btn-edit {
+  background: #0ea5e9;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background 0.2s ease;
 }
 
 .btn-edit:hover {
-  background-color: #2563eb;
+  background: #0284c7;
 }
 
+/* ===== Form Styles ===== */
 .profile-form {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 16px;
 }
 
 .profile-form label {
   display: flex;
   flex-direction: column;
-  font-weight: 600;
-  color: #374151; /* gray-700 */
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #334155;
 }
 
 .profile-form input {
-  padding: 0.6rem 0.8rem;
+  margin-top: 6px;
+  padding: 8px 12px;
+  border: 1px solid #cbd5e1;
   border-radius: 6px;
-  border: 1.5px solid #cbd5e1; /* gray-300 */
-  font-size: 1rem;
-  margin-top: 0.4rem;
-  transition: border-color 0.3s ease;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .profile-form input:focus {
-  outline: none;
-  border-color: #3b82f6;
-  box-shadow: 0 0 5px #3b82f6;
+  border-color: #0ea5e9;
+  box-shadow: 0 0 0 2px rgba(14,165,233,0.3);
 }
 
+/* ===== Button Group ===== */
 .btn-group {
   display: flex;
-  justify-content: center;
-  gap: 1rem;
+  gap: 10px;
 }
 
 .btn-save {
-  background-color: #10b981; /* emerald */
+  background: #10b981;
   color: white;
   border: none;
-  padding: 0.6rem 1.5rem;
-  border-radius: 8px;
+  padding: 8px 16px;
+  border-radius: 6px;
   cursor: pointer;
-  font-weight: 600;
-  transition: background-color 0.3s ease;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background 0.2s ease;
 }
 
 .btn-save:hover {
-  background-color: #059669;
+  background: #059669;
 }
 
 .btn-cancel {
-  background-color: #ef4444; /* red-500 */
-  color: white;
+  background: #e2e8f0;
+  color: #334155;
   border: none;
-  padding: 0.6rem 1.5rem;
-  border-radius: 8px;
+  padding: 8px 16px;
+  border-radius: 6px;
   cursor: pointer;
-  font-weight: 600;
-  transition: background-color 0.3s ease;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background 0.2s ease;
 }
 
 .btn-cancel:hover {
-  background-color: #b91c1c;
+  background: #cbd5e1;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 480px) {
+  .profile-tab {
+    padding: 16px;
+  }
+  .btn-group {
+    flex-direction: column;
+  }
+  .btn-save,
+  .btn-cancel {
+    width: 100%;
+  }
 }
